@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- 1. Input Files -->
+    <!-- Both the map and the routes go inside the <input> section. -->
+    <input>
+        <net-file value="gangnam_int.net.xml"/>
+        <route-files value="gangnam_int.rou.xml"/>
+    </input>
+
+
+    <!-- 2. Simulation Time -->
+    <time>
+        <!-- 
+            Make sure this 'end' value is long enough.
+            For a 24-hour (one day) route file: 86400
+            For a 1-week (7 day) route file: 604800
+        -->
+        <end value="86400"/>
+    </time>
+    
+    <!-- 3. (Optional) Report Settings -->
+    <!-- This can be useful for debugging. -->
+    <report>
+        <verbose value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+</configuration>
