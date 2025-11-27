@@ -120,6 +120,7 @@ class SumoEnvironment(gym.Env):
         sumo_warnings: bool = True,
         additional_sumo_cmd: Optional[str] = None,
         render_mode: Optional[str] = None,
+        additional_ts_lanes: Optional[dict] = None,
     ) -> None:
         """Initialize the environment."""
         assert render_mode is None or render_mode in self.metadata["render_modes"], "Invalid render mode."
@@ -160,6 +161,7 @@ class SumoEnvironment(gym.Env):
         self.label = str(SumoEnvironment.CONNECTION_LABEL)
         SumoEnvironment.CONNECTION_LABEL += 1
         self.sumo = None
+        self.additional_ts_lanes = additional_ts_lanes
 
         if LIBSUMO:
             traci.start([sumolib.checkBinary("sumo"), "-n", self._net])  # Start only to retrieve traffic light information
@@ -203,6 +205,7 @@ class SumoEnvironment(gym.Env):
                 self.reward_fn[ts],
                 self.reward_weights,
                 conn,
+                lanes=self.additional_ts_lanes[ts] if self.additional_ts_lanes and ts in self.additional_ts_lanes else None,
             )
             for ts in self.ts_ids
         }

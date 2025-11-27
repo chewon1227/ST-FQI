@@ -26,8 +26,15 @@ if __name__ == "__main__":
         "-route",
         dest="route",
         type=str,
-        default="sumo_rl/nets/single-intersection/single-intersection.rou.xml",
+        default="sumo_rl/nets/gangnam/gangnam_int2.rou.xml",
         help="Route definition xml file.\n",
+    )
+    prs.add_argument(
+        "-net",
+        dest="net",
+        type=str,
+        default="sumo_rl/nets/gangnam/gangnam_int.net.xml",
+        help="Network definition xml file.\n",
     )
     prs.add_argument("-a", dest="alpha", type=float, default=0.1, required=False, help="Alpha learning rate.\n")
     prs.add_argument("-g", dest="gamma", type=float, default=0.99, required=False, help="Gamma discount rate.\n")
@@ -52,9 +59,15 @@ if __name__ == "__main__":
 
     ts_ids = [args.ts_id] if args.ts_id else None
 
+    additional_ts_lanes = {
+        "7561738192": ['218864491#5_0', '218864491#5_1', '218864491#4_0', '218864491#4_1'],
+        "7561738193": ['375049565#5_0', '375049565#5_1', '375049565#5_2', '375049565#5_3', '375049565#5_4',
+                       '375049565#4_0', '375049565#4_1', '375049565#4_2', '375049565#4_3', '375049565#4_4']
+    }
+
     env = SumoEnvironment(
-        net_file="sumo_rl/nets/gangnam/gangnam_int.net.xml",
-        route_file="sumo_rl/nets/gangnam/gangnam_int.rou.xml",
+        net_file=args.net,
+        route_file=args.route,
         out_csv_name=out_csv,
         use_gui=args.gui,
         num_seconds=args.seconds,
@@ -62,7 +75,8 @@ if __name__ == "__main__":
         min_green=args.min_green,
         max_green=args.max_green,
         ts_ids=ts_ids,
-        time_to_teleport=args.teleport
+        time_to_teleport=args.teleport,
+        additional_ts_lanes=additional_ts_lanes
     )
 
     for run in range(1, args.runs + 1):

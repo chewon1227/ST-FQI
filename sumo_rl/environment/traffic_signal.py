@@ -58,6 +58,7 @@ class TrafficSignal:
         reward_fn: Union[str, Callable, List],
         reward_weights: List[float],
         sumo,
+        lanes: List[str] = None,
     ):
         """Initializes a TrafficSignal object.
 
@@ -73,6 +74,7 @@ class TrafficSignal:
             reward_fn (Union[str, Callable]): The reward function. Can be a string with the name of the reward function or a callable function.
             reward_weights (List[float]): The weights of the reward function.
             sumo (Sumo): The Sumo instance.
+            lanes (List[str]): A list of lane IDs to be controlled by this traffic signal. If None, it will be retrieved from SUMO.
         """
         self.id = ts_id
         self.env = env
@@ -107,9 +109,12 @@ class TrafficSignal:
 
         self._build_phases()
 
-        self.lanes = list(
-            dict.fromkeys(self.sumo.trafficlight.getControlledLanes(self.id))
-        )  # Remove duplicates and keep order
+        if lanes is None:
+            self.lanes = list(
+                dict.fromkeys(self.sumo.trafficlight.getControlledLanes(self.id))
+            )  # Remove duplicates and keep order
+        else:
+            self.lanes = lanes
         self.out_lanes = [link[0][1] for link in self.sumo.trafficlight.getControlledLinks(self.id) if link]
         self.out_lanes = list(set(self.out_lanes))
         self.lanes_length = {lane: self.sumo.lane.getLength(lane) for lane in self.lanes + self.out_lanes}

@@ -115,8 +115,8 @@ def evaluate(net_file, route_file, model_dir, seconds, delta_time=60, out_csv_na
 
 if __name__ == "__main__":
     prs = argparse.ArgumentParser(description="Evaluate ST-FQI Agents")
-    prs.add_argument("-net", dest="net_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int.net.xml")
-    prs.add_argument("-route", dest="route_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int.rou.xml")
+    prs.add_argument("-net", dest="net_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int2.net.xml")
+    prs.add_argument("-route", dest="route_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int_scaled.rou.xml")
     prs.add_argument("-seconds", dest="seconds", type=int, default=86400)
     prs.add_argument("-delta", dest="delta_time", type=int, default=60, help="Delta time (cycle length)")
     prs.add_argument("-models", dest="model_dir", type=str, default="models")

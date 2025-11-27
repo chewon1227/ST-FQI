@@ -137,8 +137,8 @@ if __name__ == "__main__":
     prs = argparse.ArgumentParser(description="Train ST-FQI Agents for Gangnam")
     prs.add_argument("-data_prefix", type=str, default="gangnam_data", help="Prefix of data CSVs")
     prs.add_argument("-out_dir", type=str, default="models", help="Directory to save models")
-    prs.add_argument("-net", dest="net_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int.net.xml")
-    prs.add_argument("-route", dest="route_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int.rou.xml")
+    prs.add_argument("-net", dest="net_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int2.net.xml")
+    prs.add_argument("-route", dest="route_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int_scaled.rou.xml")
     prs.add_argument("--ts_id", dest="ts_id", type=str, default=None, help="Specific Traffic Signal ID to train (e.g. J0). If None, trains all.")
     args = prs.parse_args()
 
@@ -169,10 +169,10 @@ if __name__ == "__main__":
         net_file=args.net_file,
         route_file=args.route_file,
         use_gui=False,
-        num_seconds=100, # Short, just to init
+        num_seconds=10000, # Short, just to init
         reward_fn=gangnam_reward,
         observation_class=GangnamObservationFunction,
-        single_agent=False,
+        single_agent=True,
         ts_ids=ts_ids
     )
 
@@ -187,7 +187,7 @@ if __name__ == "__main__":
         print(f"\nTraining agent for {ts_id} using {f} (n_actions={n_actions})...")
         
         df = pd.read_csv(os.path.join(data_dir, f))
-        agent = STFQI_Agent(n_iters=10)
+        agent = STFQI_Agent(n_iters=1000)
         
         # Store n_actions in agent for later use
         agent.n_actions = n_actions

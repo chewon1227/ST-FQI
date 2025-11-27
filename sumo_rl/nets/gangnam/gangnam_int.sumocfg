@@ -4,7 +4,7 @@
     <!-- 1. Input Files -->
     <!-- Both the map and the routes go inside the <input> section. -->
     <input>
-        <net-file value="gangnam_int.net.xml"/>
+        <net-file value="gangnam_int2.net.xml"/>
         <route-files value="gangnam_int.rou.xml"/>
     </input>
 

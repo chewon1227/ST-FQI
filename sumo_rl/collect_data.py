@@ -15,8 +15,8 @@ if __name__ == "__main__":
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         description="Data Collection for Gangnam Intersection (FQI)"
     )
-    prs.add_argument("-net", dest="net_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int.net.xml", help="Network file")
-    prs.add_argument("-route", dest="route_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int.rou.xml", help="Route file")
+    prs.add_argument("-net", dest="net_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int2.net.xml", help="Network file")
+    prs.add_argument("-route", dest="route_file", type=str, default="/Users/kierankhan/Dev/sumo-rl/sumo_rl/nets/gangnam/gangnam_int_scaled.rou.xml", help="Route file")
     prs.add_argument("-seconds", dest="seconds", type=int, default=100000, required=False, help="Number of simulation seconds.\n")
     prs.add_argument("-delta", dest="delta_time", type=int, default=60, help="Delta time (cycle length)")
     prs.add_argument("-v", action="store_true", default=False, help="Print experience tuple.\n")
