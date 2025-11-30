@@ -1,6 +1,6 @@
 # Gangnam ST-FQI Implementation Walkthrough
 
-I have implemented a Reinforcement Learning simulation for the Gangnam intersection using **ST-FQI (Support-Thresholded Fitted Q-Iteration)**, matching the setup from your groupmates' reference file.
+I have implemented a Reinforcement Learning simulation for the Gangnam intersection using **ST-FQI (Support-Thresholded Fitted Q-Iteration)**
 
 ## Components Implemented
 
